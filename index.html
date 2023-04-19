@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Memory Card Game</title>
+	<style type="text/css">
+	*
+	{
+		margin:0;
+		padding:0;
+		box-sizing:border-box;
+	}	
+	body
+	{
+		height:100vh;
+		display:flex;
+		background:#060AB2;
+	}
+	.memory-game
+	{
+		width:640px;
+		height:640px;
+		display:flex;
+		margin:auto;
+		flex-wrap:wrap;
+		perspective: 1000px;
+	}
+	.memory-card
+	{
+		width:calc(25% - 10px);
+		height:calc(33.333% - 10px);
+		margin:5px;
+		position:relative;
+		transform:scale(1);
+		transform-style: preserve-3d;
+		transition: transform 0.5s;
+	}
+	.memory-card:active
+	{
+		transform:scale(0.97);
+		transition:transform 0.2s
+	}
+	.memory-card.flip
+	{
+		transform: rotateY(180deg);
+	}
+	.front-face, .back-face
+	{
+		width:100%;
+		height:100%;
+		padding:20px;
+		position:absolute;
+		border-radius:5px;
+		background:#1c7ccc;
+		backface-visibility: hidden;
+	}
+	.front-face
+	{
+		transform: rotateY(180deg);
+	}
+	</style>
+</head>
+<body>
+<section class="memory-game">
+    <div class="memory-card" data-framework=aurelia>
+      <img class="front-face" src="img/aurelia.jpg" alt="Aurelia" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework=aurelia>
+      <img class="front-face" src="img/aurelia.jpg" alt="Aurelia" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework=vue>
+      <img class="front-face" src="img/vue.jpg" alt="Vue" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework=vue>
+      <img class="front-face" src="img/vue.jpg" alt="Vue" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework=angular>
+      <img class="front-face" src="img/angular.jpg" alt="Angular" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework=angular>
+      <img class="front-face" src="img/angular.jpg" alt="Angular" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework=ember>
+      <img class="front-face" src="img/ember.jpg" alt="Ember" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework=ember>
+      <img class="front-face" src="img/ember.jpg" alt="Ember" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework=backbone>
+      <img class="front-face" src="img/backbone.jpg" alt="Backbone" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework=backbone>
+      <img class="front-face" src="img/backbone.jpg" alt="Backbone" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+
+    <div class="memory-card" data-framework=react>
+      <img class="front-face" src="img/react.jpg" alt="React" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+    <div class="memory-card" data-framework=react>
+      <img class="front-face" src="img/react.jpg" alt="React" />
+      <img class="back-face" src="img/js-badge.jpg" alt="JS Badge" />
+    </div>
+  </section>
+	</section>
+
+
+
+
+<script type="text/javascript">
+	const cards=document.querySelectorAll('.memory-card');
+
+	let hasFlippedCard = false;
+	let firstCard, secondCard;
+
+	function flipCard() 
+	{
+		this.classList.add('flip');
+
+		if (!hasFlippedCard) 
+		{//first Click
+			hasFlippedCard = true;
+			firstCard = this;
+		}
+		else
+		{//Second Click
+			hasFlippedCard = false;
+			secondCard = this;
+
+			//do cards match
+			if(firstCard.dataset.framework === secondCard.dataset.framework)
+			{
+				firstCard.removeEventListener('click', flipCard);
+				secondCard.removeEventListener('click', flipCard);
+			}
+			else
+			{
+				firstCard.classList.remove('flip');
+				secondCard.classList.remove('flip');
+			}
+		}
+	}
+	cards.forEach(card => card.addEventListener('click', flipCard));
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
