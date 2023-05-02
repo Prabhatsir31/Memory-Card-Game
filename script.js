@@ -5,3 +5,6 @@ const cards=document.querySelectorAll('.memory-card');
 		this.classList.toggle('flip');
 	}
 	cards.forEach(card => card.addEventListener('click', flipCard));
+
+
+
